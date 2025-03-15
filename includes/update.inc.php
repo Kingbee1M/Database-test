@@ -1,6 +1,6 @@
 <?php
 
-// using hidden variable method
+// using placeholder method
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
     $username = $_POST["username"];
@@ -10,11 +10,15 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
     try {
         require_once "dbh.inc.php";
 
-        $query = "INSERT INTO users (username, pwd, email) VALUES (?, ?, ?);";
+        $query = "UPDATE users SET username = :username, pwd = :pwd, email = :email WHERE id = 6;";
 
         $stmt = $pdo ->prepare($query);
 
-        $stmt -> execute([$username, $pwd, $email]);
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":pwd", $pwd);
+        $stmt->bindParam(":email", $email);
+
+        $stmt->execute();
 
         $pdo = null;
         $stmt = null;

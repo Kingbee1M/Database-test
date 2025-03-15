@@ -26,3 +26,10 @@ input {
     width: 300px;
     height: 30px;
 }
+
+button {
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 70px;
+}
